@@ -1,6 +1,147 @@
 <mvc:View controllerName="ui.ruleengine.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
+    xmlns:table="sap.m.table"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
     <Page id="page" title="{i18n>title}">
+        <VBox
+            id="attributes"
+        >
+            <Label
+                id="childrenLabel"
+                labelFor="children"
+                text="Restricted Attribute"
+            />
+            <ComboBox
+                id="children"
+                items="{ 
+                    path: 'children>/'
+                }"
+                selectionChange="onAttributeChange"
+            >
+                <core:Item
+                    key="{children>key}"
+                    text="{children>value}"
+                />
+            </ComboBox>
+        </VBox>
+<!-- Children Value Table -->
+        <Table
+            id="childrenValue"
+            mode="MultiSelect"
+            items="{
+                path: 'childrenValue>/',
+                sorter: {
+                    path: 'key'
+                }
+                
+            }"
+            rememberSelections="false">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <table:Title id="childrenValueTableTitleId">
+                        <Title text="Children Values" level="H2"/>
+                    </table:Title>
+                    <ToolbarSpacer/>
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column width="12em">
+                    <Text text="Key" />
+                </Column>
+                <Column minScreenWidth="Tablet" demandPopin="true">
+                    <Text text="Value" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle">
+                    <cells>
+                        <ObjectIdentifier
+                            text="{childrenValue>key}"/>
+                        <ObjectIdentifier
+                            text="{childrenValue>value}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+<!-- The table is used to display the parents of the selected child attribute. -->
+        <Table
+            id="parents"
+            mode="MultiSelect"
+            items="{
+                path: 'parent>/',
+                sorter: {
+                    path: 'key'
+                }
+                
+            }"
+            selectionChange="onRowSelectionChange"
+            rememberSelections="false">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <table:Title id="parentTableTitleId">
+                        <Title text="Parents" level="H2"/>
+                    </table:Title>
+                    <ToolbarSpacer/>
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column width="12em">
+                    <Text text="Key" />
+                </Column>
+                <Column minScreenWidth="Tablet" demandPopin="true">
+                    <Text text="Value" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle">
+                    <cells>
+                        <ObjectIdentifier
+                            text="{parent>key}"/>
+                        <ObjectIdentifier
+                            text="{parent>value}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+<!-- Parents Value Table -->
+        <Table
+            id="parentsValue"
+            mode="MultiSelect"
+            items="{
+                path: 'parentValue>/',
+                sorter: {
+                    path: 'key'
+                }
+                
+            }"
+            rememberSelections="false">
+            <headerToolbar>
+                <OverflowToolbar>
+                    <table:Title id="parentValueTableTitleId">
+                        <Title text="Parents' Values" level="H2"/>
+                    </table:Title>
+                    <ToolbarSpacer/>
+                </OverflowToolbar>
+            </headerToolbar>
+            <columns>
+                <Column width="12em">
+                    <Text text="Key" />
+                </Column>
+                <Column minScreenWidth="Tablet" demandPopin="true">
+                    <Text text="Value" />
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem vAlign="Middle">
+                    <cells>
+                        <ObjectIdentifier
+                            text="{parentValue>key}"/>
+                        <ObjectIdentifier
+                            text="{parentValue>value}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
     </Page>
 </mvc:View>
